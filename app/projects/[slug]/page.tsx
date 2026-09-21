@@ -2,12 +2,23 @@ import {notFound} from "next/navigation";
 import {readProject} from "@/lib/projects";
 import {Breadcrumbs} from "@/ui/breadcrumbs";
 
+export const dynamic = "force-dynamic";
+
 type Props = {params: Promise<{slug: string}>};
 
 export default async function ProjectPage({params}: Props) {
 	const {slug} = await params;
-	const project = await readProject(slug);
+
+	let project;
+	try {
+		project = await readProject(slug);
+	} catch (e) {
+		if (e instanceof Error && e.message === "404") notFound();
+		throw e;
+	}
+
 	if (!project) notFound();
+
 	return (
 		<main className="px-16 py-8">
 			<Breadcrumbs

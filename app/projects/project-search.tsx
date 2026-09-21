@@ -6,6 +6,8 @@ import {useState} from "react";
 
 type Props = {projects: Project[]};
 export function ProjectSearch({projects}: Props) {
+	console.log("search ran here");
+
 	const [query, setQuery] = useState("");
 
 	const shown = projects.filter((p) =>
