@@ -7,6 +7,12 @@ export type Project = {
 	summary: string;
 };
 
+export type Stats = {
+	total: number;
+	newest: number;
+	oldest: number;
+};
+
 const PROJECTS: Project[] = [
 	{
 		slug: "store-ledger",
@@ -28,6 +34,20 @@ const PROJECTS: Project[] = [
 	},
 ];
 
-export const getProjects = async () => PROJECTS;
-export const getProject = async (slug: string) =>
-	PROJECTS.find((p) => p.slug === slug);
+export async function readProjects() {
+	return PROJECTS;
+}
+
+export async function readProject(slug: string) {
+	return PROJECTS.find((p) => p.slug === slug) ?? null;
+}
+
+export async function readStats(): Promise<Stats> {
+	await new Promise((go) => setTimeout(go, 2000));
+	const years = PROJECTS.map((p) => p.year);
+	return {
+		total: PROJECTS.length,
+		newest: Math.max(...years),
+		oldest: Math.min(...years),
+	};
+}

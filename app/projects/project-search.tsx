@@ -20,6 +20,7 @@ export function ProjectSearch({projects}: Props) {
 				placeholder="Search projects"
 				className="mt-8 w-80 border px-4 py-2"
 			/>
+
 			<ProjectList projects={shown} />
 		</>
 	);
