@@ -1,4 +1,4 @@
-import {Breadcrumbs} from "@/ui/breadcrumbs";
+import {Breadcrumbs} from "@/app/ui/breadcrumbs";
 import {Suspense} from "react";
 import {RowsSkeleton, StatsSkeleton} from "./skeletons";
 import {ProjectStats} from "./project-stats";
